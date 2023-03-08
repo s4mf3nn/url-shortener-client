@@ -36,8 +36,9 @@ export const CloseContainer = styled.div`
 export const Close = styled.button`
   background-color: transparent;
   border: none;
-  display: flex;
+  color: #000;
   cursor: pointer;
+  display: flex;
 `;
 
 export const Main = styled.div`

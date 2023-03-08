@@ -9,6 +9,12 @@ export const Spacer = styled.div<{ size: string; }>`
 `;
 
 export const ButtonContainer = styled.div`
+  align-items: center;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+`;
+
+export const AltButton = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
 `;

@@ -28,7 +28,7 @@ export const Home = () => {
     },
     {
       shortId: "Zr44cBk",
-      originUrl: "https://www.youtube.com/watch?v=fJ9rUzIMcZQ",
+      originUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       createdAt: "march 5 2023 · 18:11",
       views: 28,
     },
@@ -43,11 +43,13 @@ export const Home = () => {
   // Open signup modal when user click on "Signup" button
   const handleOpenSignupModal = (): void => {
     setIsSignupModalOpen(true);
+    window.scrollTo({ top: 0 });
     document.body.style.overflow = 'hidden';
   };
   // Open login modal when user click on "Login" button
   const handleOpenLoginModal = (): void => {
     setIsLoginModalOpen(true);
+    window.scrollTo({ top: 0 });
     document.body.style.overflow = 'hidden';
   };
 

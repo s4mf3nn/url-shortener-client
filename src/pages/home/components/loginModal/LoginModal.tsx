@@ -1,20 +1,55 @@
-import * as sc from './loginModal.style';
+import { useState } from 'react';
 import { Button, Heading, Input, Text } from '../../../../components';
+import * as sc from './loginModal.style';
 
 export const LoginModal = () => {
+  const [isForgotPanelOpen, setIsForgotPanelOpen] = useState<boolean>(false);
+
+  // Switch between login and forgot password panels
+  const toggleForgotPanel = (): void => setIsForgotPanelOpen(!isForgotPanelOpen);
+
+  if (isForgotPanelOpen) {
+    return (
+      <sc.Main>
+        <Heading level="h1">Forgot password?</Heading>
+        <sc.Spacer size="1.5rem" />
+        <Text>No worries, we'll send you reset instructions.</Text>
+        <sc.Spacer size="2rem" />
+        <Heading level="h2">Email</Heading>
+        <sc.Spacer size=".5rem" />
+        <Input type="email" placeholder="Enter your email address" />
+        <sc.Spacer size="1.5rem" />
+        <sc.ButtonContainer>
+          <sc.AltButton onClick={toggleForgotPanel}>
+            Back to login
+          </sc.AltButton>
+          <Button
+            variant="secondary"
+            label="Send"
+            onClick={() => console.log('Signup')}
+          />
+        </sc.ButtonContainer>
+        <sc.Spacer size="1rem" />
+      </sc.Main>
+    );
+  }
+
   return (
     <sc.Main>
       <Heading level="h1">Welcome back!</Heading>
       <sc.Spacer size="2rem" />
-      <Heading level="h2">Email address</Heading>
+      <Heading level="h2">Email</Heading>
       <sc.Spacer size=".5rem" />
-      <Input type="email" placeholder="Email address" />
+      <Input type="email" placeholder="Enter your email address" />
       <sc.Spacer size="1rem" />
       <Heading level="h2">Password</Heading>
       <sc.Spacer size=".5rem" />
-      <Input type="password" placeholder="Password" />
+      <Input type="password" placeholder="Choose a password" />
       <sc.Spacer size="1.5rem" />
       <sc.ButtonContainer>
+        <sc.AltButton onClick={toggleForgotPanel}>
+          Forgot Password ?
+        </sc.AltButton>
         <Button
           variant="secondary"
           label="Login"
