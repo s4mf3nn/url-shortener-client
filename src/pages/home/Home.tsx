@@ -1,4 +1,4 @@
-import { Fragment, Key, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Button, Card, Heading, Input, Logo, Modal, Text } from '../../components';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
@@ -57,6 +57,7 @@ export const Home = () => {
   const handleCloseModal = (): void => {
     setIsSignupModalOpen(false);
     setIsLoginModalOpen(false);
+    window.scrollTo({ top: 0 });
     document.body.style.overflow = 'unset';
   };
 

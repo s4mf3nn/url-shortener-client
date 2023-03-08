@@ -44,7 +44,7 @@ export const LoginModal = () => {
       <sc.Spacer size="1rem" />
       <Heading level="h2">Password</Heading>
       <sc.Spacer size=".5rem" />
-      <Input type="password" placeholder="Choose a password" />
+      <Input type="password" placeholder="Enter your password" />
       <sc.Spacer size="1.5rem" />
       <sc.ButtonContainer>
         <sc.AltButton onClick={toggleForgotPanel}>

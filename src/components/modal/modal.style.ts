@@ -17,6 +17,7 @@ export const Modal = styled.div<{ bgColor: string; }>`
   border-radius: 12px;
   box-shadow: 4px 4px 0px 0px #000;
   padding: 15px;
+  position: fixed;
   width: 450px;
 
   @media (max-width: 1200px) {
