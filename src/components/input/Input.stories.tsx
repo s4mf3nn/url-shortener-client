@@ -6,6 +6,10 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = () => <Input />;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
 export const Overview = Template.bind({});
+Overview.args = {
+  type: 'url',
+  placeholder: 'Past your link and make it shorter',
+};

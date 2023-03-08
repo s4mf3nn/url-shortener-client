@@ -11,11 +11,7 @@ export const Input = styled.input`
   min-width: 0px;
   outline: none;
   padding: 0 12px;
-  width: 100vw;
+  width: 100%;
   -webkit-appearance: none !important;
   -webkit-box-shadow: 4px 4px 0px 0px #000 !important;
-
-  @media (max-width: 1200px) {
-    width: 100%;
-  }
 `;
