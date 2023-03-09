@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Button, Heading, Input, Text } from '../../../../components';
+import FirebaseAuthService from '../../../../firebase/FirebaseAuthService';
 import { useStore } from '../../../../store';
+import { ILoginModalProps } from './loginModal.interface';
 import * as sc from './loginModal.style';
 
-export const LoginModal = () => {
+export const LoginModal: FC<ILoginModalProps> = ({ user }) => {
   const { theme } = useStore();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [isForgotPanelOpen, setIsForgotPanelOpen] = useState<boolean>(false);
 
   // Switch between login and forgot password panels
   const toggleForgotPanel = (): void => setIsForgotPanelOpen(!isForgotPanelOpen);
+
+  // Triggered when user submit the login form
+  const handleSubmitLogin = async (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    try {
+      await FirebaseAuthService.registerUser(email, password);
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      if (error instanceof Error) return alert(error.message);
+    }
+  };
 
   if (isForgotPanelOpen) {
     return (

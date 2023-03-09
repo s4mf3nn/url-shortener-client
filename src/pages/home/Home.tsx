@@ -6,21 +6,21 @@ import { GlobalStyle } from '../../styles/GlobalStyle';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
-// import firebase from '../../FirebaseConfig';
-
-interface Link {
-  shortId: string;
-  originUrl: string;
-  createdAt: string;
-  views: number;
-}
+import FirebaseAuthService from '../../firebase/FirebaseAuthService';
+import { Link } from './home.interface';
 
 const themes = ["sweet", "mario", "nintendo", "beach", "autumn", "sunset", "vintage"];
 
 export const Home = () => {
   const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
+
+  const [user, setUser] = useState(null);
+
+  FirebaseAuthService.subscribeToAuthChanges(setUser);
+
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+
   const [links] = useState<Link[]>(data);
 
   // Open signup modal when user click on "Signup" button
@@ -102,7 +102,7 @@ export const Home = () => {
         <SignupModal />
       </Modal>
       <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_LOGIN_BACKGROUND}>
-        <LoginModal />
+        <LoginModal user={user} />
       </Modal>
     </ThemeProvider>
   );
