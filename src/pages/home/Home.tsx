@@ -6,6 +6,7 @@ import { GlobalStyle } from '../../styles/GlobalStyle';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
+import firebase from '../../FirebaseConfig';
 
 interface Link {
   shortId: string;
