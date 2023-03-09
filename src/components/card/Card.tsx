@@ -1,6 +1,7 @@
 import copy from 'copy-to-clipboard';
 import { FC } from 'react';
 import { Clock, Copy, Eye } from 'react-feather';
+import { useStore } from '../../store';
 import { Text } from '../text/Text';
 import * as sc from './card.style';
 
@@ -12,6 +13,7 @@ interface CardProps {
 }
 
 export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) => {
+  const { theme } = useStore();
 
   // Copy short URL to clicpboard
   const handleCopyUrl = () => {
@@ -23,14 +25,14 @@ export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) =>
       <sc.Header>
         <sc.ShortUrl>
           <Text large bold>fiii.it/</Text>
-          <Text color="#1463ff" large bold>{shortId}</Text>
+          <Text color={theme.SHORT_LINK} large bold>{shortId}</Text>
         </sc.ShortUrl>
         <sc.Side>
-          <sc.Copy onClick={handleCopyUrl}>
-            <Copy size={16} />
+          <sc.Copy onClick={handleCopyUrl} theme={theme}>
+            <Copy size={16} color={theme.COPY_BTN_ICON} />
           </sc.Copy>
-          <sc.View>
-            <Eye size={16} /> {views}
+          <sc.View theme={theme}>
+            <Eye size={16} color={theme.VIEWS_BTN_LABEL} /> {views}
           </sc.View>
         </sc.Side>
       </sc.Header>

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { ITheme } from '../../styles/themes/theme.interface';
 
 export const Spacer = styled.div<{ size: string; }>`
   height: ${p => p.size};
 `;
 
-export const Header = styled.div`
+export const Header = styled.div<{ theme: ITheme; }>`
   align-items: center;
-  background-color: #14af6c;
+  background-color: ${p => p.theme.HEADER};
   border-bottom: 3px solid #000;
   display: flex;
   height: 78px;

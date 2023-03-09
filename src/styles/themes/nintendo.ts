@@ -1,0 +1,28 @@
+import { ITheme } from "./theme.interface";
+
+export const nintendo: ITheme = {
+  SHORTEN_BTN_BACKGROUND: "#dd2020",
+  SHORTEN_BTN_LABEL: "#fff",
+  SIGNUP_BTN_BACKGROUND: "#dd2020",
+  SIGNUP_BTN_LABEL: "#fff",
+  LOGIN_BTN_BACKGROUND: "#fff",
+  LOGIN_BTN_LABEL: "#000",
+  HEADER: "#e5e5e5",
+  LOGO_BACKGROUND: "#dd2020",
+  LOGO_ICON: "#fff",
+  BRAND: "#000",
+  SHORT_LINK: "#dd2020",
+  COPY_BTN_BACKGROUND: "#dd2020",
+  COPY_BTN_ICON: "#fff",
+  VIEWS_BTN_BACKGROUND: "#e5e5e5",
+  VIEWS_BTN_LABEL: "#000",
+  MODAL_SIGNUP_BACKGROUND: "#e5e5e5",
+  MODAL_SIGNUP_TEXT: "#000",
+  MODAL_SIGNUP_BTN_BACKGROUND: "#dd2020",
+  MODAL_SIGNUP_BTN_LABEL: "#fff",
+  MODAL_LOGIN_BACKGROUND: "#e5e5e5",
+  MODAL_LOGIN_TEXT: "#000",
+  MODAL_LOGIN_BTN_BACKGROUND: "#dd2020",
+  MODAL_LOGIN_BTN_LABEL: "#fff",
+  WHITE: "#fff",
+};

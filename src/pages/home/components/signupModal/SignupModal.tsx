@@ -1,7 +1,10 @@
-import * as sc from './signupModal.style';
 import { Button, Heading, Input, Text } from '../../../../components';
+import { useStore } from '../../../../store';
+import * as sc from './signupModal.style';
 
 export const SignupModal = () => {
+  const { theme, changeTheme } = useStore();
+
   return (
     <sc.Main>
       <Heading level="h1">Hey hello! 👋</Heading>
@@ -18,7 +21,8 @@ export const SignupModal = () => {
       <sc.Spacer size="1.5rem" />
       <sc.ButtonContainer>
         <Button
-          variant="secondary"
+          bgColor={theme.MODAL_SIGNUP_BTN_BACKGROUND}
+          labelColor={theme.MODAL_SIGNUP_BTN_LABEL}
           label="Signup"
           onClick={() => console.log('Signup')}
         />

@@ -10,19 +10,22 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  variant: 'primary',
+  bgColor: '#1663ff',
+  labelColor: '#fff',
   label: 'Shorten',
   scissors: true,
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  variant: 'secondary',
+  bgColor: '#f7ce22',
+  labelColor: '#000',
   label: 'Signup',
 };
 
 export const Tertiary = Template.bind({});
 Tertiary.args = {
-  variant: 'tertiary',
+  bgColor: '#fff',
+  labelColor: '#000',
   label: 'Login',
 };

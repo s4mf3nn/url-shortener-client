@@ -1,7 +1,11 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 import { Button, Card, Heading, Input, Logo, Modal, Text } from '../../components';
+import { useStore } from '../../store';
+import { classic, nintendo } from '../../styles/themes';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
+import { links as data } from './mocks/links.mock';
 
 interface Link {
   shortId: string;
@@ -10,35 +14,14 @@ interface Link {
   views: number;
 }
 
+const themes = ["classic", "nintendo"];
+
 export const Home = () => {
+  const { theme, changeTheme } = useStore();
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [links, setLinks] = useState<Link[]>([
-    {
-      shortId: "y6gpuN",
-      originUrl: "https://github.com/s4mf3nn",
-      createdAt: "just now",
-      views: 97,
-    },
-    {
-      shortId: "5hwZx3",
-      originUrl: "https://www.linkedin.com/in/samir-fennikh",
-      createdAt: "march 5 2023 · 19:47",
-      views: 44,
-    },
-    {
-      shortId: "Zr44cBk",
-      originUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      createdAt: "march 5 2023 · 18:11",
-      views: 28,
-    },
-    {
-      shortId: "MqA67c",
-      originUrl: "https://solar-system-theta.vercel.app",
-      createdAt: "march 5 2023 · 17:44",
-      views: 21,
-    }
-  ]);
+  const [links, setLinks] = useState<Link[]>(data);
+  const [themeIndex, setThemeIndex] = useState<number>(0);
 
   // Open signup modal when user click on "Signup" button
   const handleOpenSignupModal = (): void => {
@@ -46,6 +29,7 @@ export const Home = () => {
     window.scrollTo({ top: 0 });
     document.body.style.overflow = 'hidden';
   };
+
   // Open login modal when user click on "Login" button
   const handleOpenLoginModal = (): void => {
     setIsLoginModalOpen(true);
@@ -64,13 +48,26 @@ export const Home = () => {
   // Create short Url when user click on "Shorten" button
   const handleShortUrl = (): void => console.log('todo');
 
+  // Change the app theme when user clicks the logo
+  const themeSwitcher = () => {
+    const newIndex = themeIndex + 1;
+    newIndex > themes.length - 1
+      ? setThemeIndex(0)
+      : setThemeIndex(themeIndex + 1);
+  };
+
+  // Update the store with the new theme
+  useEffect(() => {
+    changeTheme(themes[themeIndex]);
+  }, [themeIndex]);
+
   return (
-    <>
-      <sc.Header>
-        <Logo withBrand />
+    <ThemeProvider theme={theme}>
+      <sc.Header theme={theme}>
+        <Logo withBrand onClick={themeSwitcher} />
         <sc.BtnContainer>
-          <Button variant="secondary" label="Signup" onClick={handleOpenSignupModal} />
-          <Button variant="tertiary" label="Login" onClick={handleOpenLoginModal} />
+          <Button bgColor={theme.SIGNUP_BTN_BACKGROUND} labelColor={theme.SIGNUP_BTN_LABEL} label="Signup" onClick={handleOpenSignupModal} />
+          <Button bgColor={theme.LOGIN_BTN_BACKGROUND} labelColor={theme.LOGIN_BTN_LABEL} label="Login" onClick={handleOpenLoginModal} />
         </sc.BtnContainer>
       </sc.Header>
       <sc.Main>
@@ -82,7 +79,7 @@ export const Home = () => {
         <sc.Spacer size="2rem" />
         <sc.FormContainer>
           <Input type="url" placeholder="Past your link and make it shorter" />
-          <Button variant="primary" label="Shorten" scissors onClick={handleShortUrl} />
+          <Button bgColor={theme.SHORTEN_BTN_BACKGROUND} labelColor={theme.SHORTEN_BTN_LABEL} label="Shorten" scissors onClick={handleShortUrl} />
         </sc.FormContainer>
         <sc.Spacer size="1.25rem" />
         <Text>Shortening <b>4,601</b> URLs that have been accessed <b>80,193</b> times.</Text>
@@ -100,12 +97,12 @@ export const Home = () => {
         })}
       </sc.List>
       <sc.Spacer size="3rem" />
-      <Modal isOpen={isSignupModalOpen} onClose={handleCloseModal} bgColor="#a276fe">
+      <Modal isOpen={isSignupModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_SIGNUP_BACKGROUND}>
         <SignupModal />
       </Modal>
-      <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal} bgColor="#ff5151">
+      <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_LOGIN_BACKGROUND}>
         <LoginModal />
       </Modal>
-    </>
+    </ThemeProvider>
   );
 };

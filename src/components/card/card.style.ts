@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ITheme } from '../../styles/themes/theme.interface';
 
 export const Wrapper = styled.div`
   border: 2px solid #000;
@@ -34,9 +35,9 @@ export const Side = styled.div`
   gap: 8px;
 `;
 
-export const Copy = styled.button`
+export const Copy = styled.button<{ theme: ITheme; }>`
   align-items: center;
-  background-color: #ff5151;
+  background-color: ${p => p.theme.COPY_BTN_BACKGROUND};
   border: 2px solid #000;
   border-radius: 9px;
   color: #000;
@@ -52,11 +53,12 @@ export const Copy = styled.button`
   }
 `;
 
-export const View = styled.div`
+export const View = styled.div<{ theme: ITheme; }>`
   align-items: center;
-  background-color: #f7ce22;
+  background-color: ${p => p.theme.VIEWS_BTN_BACKGROUND};
   border: 2px solid #000;
   border-radius: 9px;
+  color: ${p => p.theme.VIEWS_BTN_LABEL};
   display: flex;
   font-family: 'Poppins';
   font-size: .85rem;

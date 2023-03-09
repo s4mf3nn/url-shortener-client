@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Button, Heading, Input, Text } from '../../../../components';
+import { useStore } from '../../../../store';
 import * as sc from './loginModal.style';
 
 export const LoginModal = () => {
+  const { theme, changeTheme } = useStore();
   const [isForgotPanelOpen, setIsForgotPanelOpen] = useState<boolean>(false);
 
   // Switch between login and forgot password panels
@@ -24,9 +26,10 @@ export const LoginModal = () => {
             Back to login
           </sc.AltButton>
           <Button
-            variant="secondary"
+            bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
+            labelColor={theme.MODAL_LOGIN_BTN_LABEL}
             label="Send"
-            onClick={() => console.log('Signup')}
+            onClick={() => console.log('login')}
           />
         </sc.ButtonContainer>
         <sc.Spacer size="1rem" />
@@ -51,7 +54,8 @@ export const LoginModal = () => {
           Forgot Password ?
         </sc.AltButton>
         <Button
-          variant="secondary"
+          bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
+          labelColor={theme.MODAL_LOGIN_BTN_LABEL}
           label="Login"
           onClick={() => console.log('Signup')}
         />

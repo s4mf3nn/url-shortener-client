@@ -1,21 +1,17 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'tertiary';
+  bgColor: string;
+  labelColor: string;
 }
 
 export const Button = styled.button<ButtonProps>`
   align-items: center;
-  background-color: ${p => p.variant === 'primary'
-    ? '#1663ff'
-    : p.variant === 'secondary'
-      ? '#f7ce22'
-      : '#fff'
-  };
+  background-color: ${p => p.bgColor};
   border: 2px solid #000;
   border-radius: 12px;
   box-shadow: 4px 4px 0px 0px #000;
-  color: ${p => p.variant === 'primary' ? '#fff' : '#000'};
+  color: ${p => p.labelColor};
   cursor: pointer;
   display: flex;
   font-family: 'Poppins';
