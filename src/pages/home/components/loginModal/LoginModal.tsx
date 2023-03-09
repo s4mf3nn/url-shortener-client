@@ -4,7 +4,7 @@ import { useStore } from '../../../../store';
 import * as sc from './loginModal.style';
 
 export const LoginModal = () => {
-  const { theme, changeTheme } = useStore();
+  const { theme } = useStore();
   const [isForgotPanelOpen, setIsForgotPanelOpen] = useState<boolean>(false);
 
   // Switch between login and forgot password panels

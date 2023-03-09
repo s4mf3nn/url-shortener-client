@@ -3,7 +3,7 @@ import { useStore } from '../../../../store';
 import * as sc from './signupModal.style';
 
 export const SignupModal = () => {
-  const { theme, changeTheme } = useStore();
+  const { theme } = useStore();
 
   return (
     <sc.Main>

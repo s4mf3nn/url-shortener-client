@@ -7,6 +7,6 @@ Start shortening your URLs today in just a few clicks and keep track your audien
 
 ## Link to the project
 
-[https://url-shortener-fiiiit.vercel.app/](https://url-shortener-fiiiit.vercel.app/)
+[https://url-shortener-81190.web.app](https://url-shortener-81190.web.app)
 
 🌈 Try clicking on the logo to change the color theme
