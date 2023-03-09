@@ -6,7 +6,7 @@ import { GlobalStyle } from '../../styles/GlobalStyle';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
-import firebase from '../../FirebaseConfig';
+// import firebase from '../../FirebaseConfig';
 
 interface Link {
   shortId: string;
@@ -21,7 +21,7 @@ export const Home = () => {
   const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [links, setLinks] = useState<Link[]>(data);
+  const [links] = useState<Link[]>(data);
 
   // Open signup modal when user click on "Signup" button
   const handleOpenSignupModal = (): void => {
@@ -59,7 +59,7 @@ export const Home = () => {
   // Update the store with the new theme
   useEffect(() => {
     changeTheme(themes[themeIndex]);
-  }, [themeIndex]);
+  }, [themeIndex, changeTheme]);
 
   return (
     <ThemeProvider theme={theme}>

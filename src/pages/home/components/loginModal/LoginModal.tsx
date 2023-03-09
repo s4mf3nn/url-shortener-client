@@ -29,7 +29,7 @@ export const LoginModal = () => {
             bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
             labelColor={theme.MODAL_LOGIN_BTN_LABEL}
             label="Send"
-            onClick={() => console.log('login')}
+            onClick={() => console.log('password reset')}
           />
         </sc.ButtonContainer>
         <sc.Spacer size="1rem" />
@@ -57,7 +57,7 @@ export const LoginModal = () => {
           bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
           labelColor={theme.MODAL_LOGIN_BTN_LABEL}
           label="Login"
-          onClick={() => console.log('Signup')}
+          onClick={() => console.log('login')}
         />
       </sc.ButtonContainer>
       <sc.Spacer size="1rem" />
