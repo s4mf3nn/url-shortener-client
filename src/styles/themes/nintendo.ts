@@ -24,5 +24,6 @@ export const nintendo: ITheme = {
   MODAL_LOGIN_TEXT: "#000",
   MODAL_LOGIN_BTN_BACKGROUND: "#dd2020",
   MODAL_LOGIN_BTN_LABEL: "#fff",
-  WHITE: "#fff",
+  BODY_BACKGROUND: "#fff",
+  CARD_BACKGROUND: "#fff",
 };

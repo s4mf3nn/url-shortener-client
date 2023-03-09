@@ -21,7 +21,7 @@ export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) =>
   };
 
   return (
-    <sc.Wrapper>
+    <sc.Wrapper bgColor={theme.CARD_BACKGROUND}>
       <sc.Header>
         <sc.ShortUrl>
           <Text large bold>fiii.it/</Text>

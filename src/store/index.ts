@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { create } from 'zustand';
-import { beach, classic, nintendo } from '../styles/themes';
+import { autumn, beach, mario, nintendo, sunset, sweet, vintage } from '../styles/themes';
 import { ITheme } from '../styles/themes/theme.interface';
 
 interface IState {
@@ -11,13 +11,17 @@ interface IState {
 }
 
 const themes = {
+  "autumn": autumn,
   "beach": beach,
-  "classic": classic,
+  "mario": mario,
   "nintendo": nintendo,
+  "sunset": sunset,
+  "sweet": sweet,
+  "vintage": vintage,
 };
 
 export const useStore = create<IState>()((set) => ({
-  theme: classic,
+  theme: mario,
   themeIndex: parseInt(localStorage.getItem("themeIndex")) || 0,
   setThemeIndex: (index) => set(() => {
     localStorage.setItem("themeIndex", index);

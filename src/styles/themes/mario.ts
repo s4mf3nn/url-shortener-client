@@ -1,6 +1,6 @@
 import { ITheme } from "./theme.interface";
 
-export const classic: ITheme = {
+export const mario: ITheme = {
   SHORTEN_BTN_BACKGROUND: "#1663ff",
   SHORTEN_BTN_LABEL: "#fff",
   SIGNUP_BTN_BACKGROUND: "#f7ce22",
@@ -24,5 +24,6 @@ export const classic: ITheme = {
   MODAL_LOGIN_TEXT: "#000",
   MODAL_LOGIN_BTN_BACKGROUND: "#f7ce22",
   MODAL_LOGIN_BTN_LABEL: "#000",
-  WHITE: "#fff",
+  BODY_BACKGROUND: "#fff",
+  CARD_BACKGROUND: "#fff",
 };

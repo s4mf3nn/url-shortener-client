@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Button, Card, Heading, Input, Logo, Modal, Text } from '../../components';
 import { useStore } from '../../store';
-import { classic, nintendo } from '../../styles/themes';
+import { GlobalStyle } from '../../styles/GlobalStyle';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
@@ -14,7 +14,7 @@ interface Link {
   views: number;
 }
 
-const themes = ["beach", "classic", "nintendo"];
+const themes = ["sweet", "mario", "nintendo", "beach", "autumn", "sunset", "vintage"];
 
 export const Home = () => {
   const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
@@ -62,6 +62,7 @@ export const Home = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle bgColor={theme.BODY_BACKGROUND} />
       <sc.Header theme={theme}>
         <Logo withBrand onClick={themeSwitcher} />
         <sc.BtnContainer>

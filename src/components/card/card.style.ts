@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { ITheme } from '../../styles/themes/theme.interface';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ bgColor: string; }>`
+  background-color: ${p => p.bgColor};
   border: 2px solid #000;
   border-radius: 12px;
   box-shadow: 4px 4px 0px 0px #000;

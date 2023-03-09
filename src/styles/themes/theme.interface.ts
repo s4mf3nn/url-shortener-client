@@ -22,5 +22,6 @@ export interface ITheme {
   MODAL_LOGIN_TEXT: string;
   MODAL_LOGIN_BTN_BACKGROUND: string;
   MODAL_LOGIN_BTN_LABEL: string;
-  WHITE: string;
+  BODY_BACKGROUND: string;
+  CARD_BACKGROUND: string;
 }
