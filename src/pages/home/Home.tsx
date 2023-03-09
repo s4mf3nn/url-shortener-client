@@ -14,14 +14,13 @@ interface Link {
   views: number;
 }
 
-const themes = ["classic", "nintendo"];
+const themes = ["beach", "classic", "nintendo"];
 
 export const Home = () => {
-  const { theme, changeTheme } = useStore();
+  const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>(data);
-  const [themeIndex, setThemeIndex] = useState<number>(0);
 
   // Open signup modal when user click on "Signup" button
   const handleOpenSignupModal = (): void => {
