@@ -27,4 +27,6 @@ export const mario: ITheme = {
   BODY_BACKGROUND: "#fff",
   CARD_BACKGROUND: "#fff",
   USER_EMAIL: "#000",
+  GOOGLE_BTN_BACKGROUND: "#1663ff",
+  GOOGLE_BTN_LABEL: "#fff",
 };

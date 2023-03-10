@@ -27,4 +27,6 @@ export const sunset: ITheme = {
   BODY_BACKGROUND: "#fff",
   CARD_BACKGROUND: "#fff",
   USER_EMAIL: "#fff",
+  GOOGLE_BTN_BACKGROUND: "#C539B4",
+  GOOGLE_BTN_LABEL: "#fff",
 };

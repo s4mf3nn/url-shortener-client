@@ -17,6 +17,7 @@ export const LoginModal = () => {
   // Triggered when user submit the login form
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (!email || !password) return alert("Missing email address or password.");
 
     try {
       await FirebaseAuthService.loginUser(email, password);
@@ -28,9 +29,19 @@ export const LoginModal = () => {
     }
   };
 
+  const handleLoginWithGoogle = async () => {
+    try {
+      await FirebaseAuthService.loginWithGoogle();
+      setIsLoginModalOpen(false);
+    } catch (error) {
+      if (error instanceof Error) return alert(error.message);
+    }
+  };
+
   // Triggered when user submit the login form
   const handleForgotPwdSubmit = async (e: any) => {
     e.preventDefault();
+    if (!email) return alert("Missing email address.");
 
     try {
       await FirebaseAuthService.sendPasswordResetEmail(email);
@@ -62,7 +73,6 @@ export const LoginModal = () => {
               bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
               labelColor={theme.MODAL_LOGIN_BTN_LABEL}
               label="Send"
-              onClick={() => console.log('password reset')}
             />
           </sc.ButtonContainer>
         </form>
@@ -74,6 +84,15 @@ export const LoginModal = () => {
   return (
     <sc.Main>
       <Heading level="h1">Welcome back!</Heading>
+      <sc.Spacer size="2rem" />
+      <sc.LoginWithGoogle>
+        <Button
+          bgColor={theme.GOOGLE_BTN_BACKGROUND}
+          labelColor={theme.GOOGLE_BTN_LABEL}
+          label="Login with Google"
+          onClick={handleLoginWithGoogle}
+        />
+      </sc.LoginWithGoogle>
       <sc.Spacer size="2rem" />
       <form onSubmit={handleSubmit}>
         <Heading level="h2">Email</Heading>

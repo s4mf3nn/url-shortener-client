@@ -18,3 +18,7 @@ export const AltButton = styled.span`
   cursor: pointer;
   text-decoration: underline;
 `;
+
+export const LoginWithGoogle = styled.div`
+  display: grid;
+`;

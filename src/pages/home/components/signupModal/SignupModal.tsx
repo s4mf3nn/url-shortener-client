@@ -14,6 +14,8 @@ export const SignupModal = () => {
   // Triggered when user submit the signup form
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (!email || !password) return alert("Missing email address or password.");
+
     try {
       setIsLoading(true);
       await FirebaseAuthService.registerUser(email, password);

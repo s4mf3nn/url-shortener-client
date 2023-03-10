@@ -27,4 +27,6 @@ export const vintage: ITheme = {
   BODY_BACKGROUND: "#a2c1e0",
   CARD_BACKGROUND: "#fff",
   USER_EMAIL: "#fff",
+  GOOGLE_BTN_BACKGROUND: "#b53c23",
+  GOOGLE_BTN_LABEL: "#fff",
 };

@@ -8,8 +8,9 @@ import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
 import FirebaseAuthService from '../../firebase/FirebaseAuthService';
 import { Link } from './home.interface';
+import { User } from 'react-feather';
 
-const themes = ["sweet", "mario", "beach", "autumn", "sunset", "vintage"];
+const themes = ["sweet", "mario", /*"dark",*/ "autumn", "sunset", "vintage"];
 
 export const Home = () => {
   const store = useStore();
@@ -78,7 +79,8 @@ export const Home = () => {
           </sc.BtnContainer>
         ) : (
           <sc.BtnContainer>
-            <Text color={store.theme.USER_EMAIL}>{user.email}</Text>
+            {/* <Text color={store.theme.USER_EMAIL} small>{user.email}</Text> */}
+            <User color={store.theme.USER_EMAIL} />
             <Button bgColor={store.theme.SIGNUP_BTN_BACKGROUND} labelColor={store.theme.SIGNUP_BTN_LABEL} label="Logout" onClick={handleLogout} />
           </sc.BtnContainer>
         )

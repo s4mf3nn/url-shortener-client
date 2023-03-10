@@ -16,7 +16,7 @@ interface IStore {
 
 const themes = {
   "autumn": theme.autumn,
-  "beach": theme.beach,
+  "dark": theme.dark,
   "mario": theme.mario,
   "sunset": theme.sunset,
   "sweet": theme.sweet,
