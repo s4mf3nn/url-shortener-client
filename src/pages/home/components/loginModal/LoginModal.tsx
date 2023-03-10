@@ -1,11 +1,9 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { Button, Heading, Input, Text } from '../../../../components';
-import FirebaseAuthService from '../../../../firebase/FirebaseAuthService';
 import { useStore } from '../../../../store';
-import { ILoginModalProps } from './loginModal.interface';
 import * as sc from './loginModal.style';
 
-export const LoginModal: FC<ILoginModalProps> = ({ user }) => {
+export const LoginModal = () => {
   const { theme } = useStore();
 
   const [email, setEmail] = useState<string>("");
@@ -16,16 +14,8 @@ export const LoginModal: FC<ILoginModalProps> = ({ user }) => {
   const toggleForgotPanel = (): void => setIsForgotPanelOpen(!isForgotPanelOpen);
 
   // Triggered when user submit the login form
-  const handleSubmitLogin = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    try {
-      await FirebaseAuthService.registerUser(email, password);
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      if (error instanceof Error) return alert(error.message);
-    }
   };
 
   if (isForgotPanelOpen) {
@@ -37,7 +27,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ user }) => {
         <sc.Spacer size="2rem" />
         <Heading level="h2">Email</Heading>
         <sc.Spacer size=".5rem" />
-        <Input type="email" placeholder="Enter your email address" />
+        <Input type="email" placeholder="Enter your email address" onChange={setEmail} value={email} />
         <sc.Spacer size="1.5rem" />
         <sc.ButtonContainer>
           <sc.AltButton onClick={toggleForgotPanel}>
@@ -59,25 +49,26 @@ export const LoginModal: FC<ILoginModalProps> = ({ user }) => {
     <sc.Main>
       <Heading level="h1">Welcome back!</Heading>
       <sc.Spacer size="2rem" />
-      <Heading level="h2">Email</Heading>
-      <sc.Spacer size=".5rem" />
-      <Input type="email" placeholder="Enter your email address" />
-      <sc.Spacer size="1rem" />
-      <Heading level="h2">Password</Heading>
-      <sc.Spacer size=".5rem" />
-      <Input type="password" placeholder="Enter your password" />
-      <sc.Spacer size="1.5rem" />
-      <sc.ButtonContainer>
-        <sc.AltButton onClick={toggleForgotPanel}>
-          Forgot Password ?
-        </sc.AltButton>
-        <Button
-          bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
-          labelColor={theme.MODAL_LOGIN_BTN_LABEL}
-          label="Login"
-          onClick={() => console.log('login')}
-        />
-      </sc.ButtonContainer>
+      <form onSubmit={handleSubmit}>
+        <Heading level="h2">Email</Heading>
+        <sc.Spacer size=".5rem" />
+        <Input type="email" placeholder="Enter your email address" onChange={setEmail} value={email} />
+        <sc.Spacer size="1rem" />
+        <Heading level="h2">Password</Heading>
+        <sc.Spacer size=".5rem" />
+        <Input type="password" placeholder="Enter your password" onChange={setPassword} value={password} />
+        <sc.Spacer size="1.5rem" />
+        <sc.ButtonContainer>
+          <sc.AltButton onClick={toggleForgotPanel}>
+            Forgot Password ?
+          </sc.AltButton>
+          <Button
+            bgColor={theme.MODAL_LOGIN_BTN_BACKGROUND}
+            labelColor={theme.MODAL_LOGIN_BTN_LABEL}
+            label="Login"
+          />
+        </sc.ButtonContainer>
+      </form>
       <sc.Spacer size="1rem" />
     </sc.Main>
   );

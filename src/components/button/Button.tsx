@@ -7,12 +7,12 @@ interface ButtonProps {
   labelColor: string;
   label: string;
   scissors?: true;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const Button: FC<ButtonProps> = ({ bgColor, labelColor, label, scissors, onClick }) => {
   return (
-    <sc.Button type="button" bgColor={bgColor} labelColor={labelColor} onClick={onClick}>
+    <sc.Button type="submit" bgColor={bgColor} labelColor={labelColor} onClick={onClick}>
       {label}
       {scissors && <Scissors width={16} />}
     </sc.Button>

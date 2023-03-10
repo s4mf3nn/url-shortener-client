@@ -13,11 +13,13 @@ const themes = ["sweet", "mario", "nintendo", "beach", "autumn", "sunset", "vint
 
 export const Home = () => {
   const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
-
   const [user, setUser] = useState(null);
 
-  FirebaseAuthService.subscribeToAuthChanges(setUser);
+  useEffect(() => {
+    FirebaseAuthService.subscribeToAuthChanges(setUser);
+  }, []);
 
+  const [urlToShorten, setUrlToShorten] = useState<string>("");
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
@@ -66,10 +68,17 @@ export const Home = () => {
       <GlobalStyle bgColor={theme.BODY_BACKGROUND} />
       <sc.Header theme={theme}>
         <Logo withBrand onClick={themeSwitcher} />
-        <sc.BtnContainer>
-          <Button bgColor={theme.SIGNUP_BTN_BACKGROUND} labelColor={theme.SIGNUP_BTN_LABEL} label="Signup" onClick={handleOpenSignupModal} />
-          <Button bgColor={theme.LOGIN_BTN_BACKGROUND} labelColor={theme.LOGIN_BTN_LABEL} label="Login" onClick={handleOpenLoginModal} />
-        </sc.BtnContainer>
+        {!user ? (
+          <sc.BtnContainer>
+            <>
+              <Button bgColor={theme.SIGNUP_BTN_BACKGROUND} labelColor={theme.SIGNUP_BTN_LABEL} label="Signup" onClick={handleOpenSignupModal} />
+              <Button bgColor={theme.LOGIN_BTN_BACKGROUND} labelColor={theme.LOGIN_BTN_LABEL} label="Login" onClick={handleOpenLoginModal} />
+            </>
+          </sc.BtnContainer>
+        ) : (
+          <Button bgColor={theme.SIGNUP_BTN_BACKGROUND} labelColor={theme.SIGNUP_BTN_LABEL} label="Logout" onClick={() => FirebaseAuthService.logoutUser()} />
+        )
+        }
       </sc.Header>
       <sc.Main>
         <Heading level="h1">Keep your link fit!</Heading>
@@ -79,7 +88,7 @@ export const Home = () => {
         </sc.Subtitle>
         <sc.Spacer size="2rem" />
         <sc.FormContainer>
-          <Input type="url" placeholder="Past your link and make it shorter" />
+          <Input type="url" placeholder="Past your link and make it shorter" onChange={setUrlToShorten} value={urlToShorten} />
           <Button bgColor={theme.SHORTEN_BTN_BACKGROUND} labelColor={theme.SHORTEN_BTN_LABEL} label="Shorten" scissors onClick={handleShortUrl} />
         </sc.FormContainer>
         <sc.Spacer size="1.25rem" />
@@ -102,7 +111,7 @@ export const Home = () => {
         <SignupModal />
       </Modal>
       <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_LOGIN_BACKGROUND}>
-        <LoginModal user={user} />
+        <LoginModal />
       </Modal>
     </ThemeProvider>
   );

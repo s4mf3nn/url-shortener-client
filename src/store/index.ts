@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { autumn, beach, mario, nintendo, sunset, sweet, vintage } from '../styles/themes';
 import { ITheme } from '../styles/themes/theme.interface';
 
-interface IState {
+interface IStore {
   theme: ITheme;
   themeIndex: number;
   setThemeIndex: (theme: number) => void;
@@ -20,8 +20,8 @@ const themes = {
   "vintage": vintage,
 };
 
-export const useStore = create<IState>()((set) => ({
-  theme: mario,
+export const useStore = create<IStore>()((set) => ({
+  theme: mario, // default theme
   themeIndex: parseInt(localStorage.getItem("themeIndex")) || 0,
   setThemeIndex: (index) => set(() => {
     localStorage.setItem("themeIndex", index);
