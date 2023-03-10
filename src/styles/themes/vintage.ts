@@ -26,4 +26,5 @@ export const vintage: ITheme = {
   MODAL_LOGIN_BTN_LABEL: "#fff",
   BODY_BACKGROUND: "#a2c1e0",
   CARD_BACKGROUND: "#fff",
+  USER_EMAIL: "#fff",
 };

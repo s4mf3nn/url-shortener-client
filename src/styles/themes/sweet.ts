@@ -26,4 +26,5 @@ export const sweet: ITheme = {
   MODAL_LOGIN_BTN_LABEL: "#fff",
   BODY_BACKGROUND: "#F2E5E5",
   CARD_BACKGROUND: "#fff",
+  USER_EMAIL: "#fff",
 };

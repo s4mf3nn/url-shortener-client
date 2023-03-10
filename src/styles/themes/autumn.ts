@@ -26,4 +26,5 @@ export const autumn: ITheme = {
   MODAL_LOGIN_BTN_LABEL: "#000",
   BODY_BACKGROUND: "#fff",
   CARD_BACKGROUND: "#fff",
+  USER_EMAIL: "#fff",
 };

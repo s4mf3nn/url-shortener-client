@@ -5,20 +5,25 @@ import { useStore } from '../../../../store';
 import * as sc from './signupModal.style';
 
 export const SignupModal = () => {
-  const { theme } = useStore();
+  const { theme, setIsSignupModalOpen } = useStore();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Triggered when user submit the signup form
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       await FirebaseAuthService.registerUser(email, password);
       setEmail("");
       setPassword("");
+      setIsSignupModalOpen(false);
     } catch (error) {
       if (error instanceof Error) return alert(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -42,6 +47,8 @@ export const SignupModal = () => {
             bgColor={theme.MODAL_SIGNUP_BTN_BACKGROUND}
             labelColor={theme.MODAL_SIGNUP_BTN_LABEL}
             label="Signup"
+            disabled={isLoading}
+            isLoading={isLoading}
           />
         </sc.ButtonContainer>
       </form>

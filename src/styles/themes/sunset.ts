@@ -26,4 +26,5 @@ export const sunset: ITheme = {
   MODAL_LOGIN_BTN_LABEL: "#fff",
   BODY_BACKGROUND: "#fff",
   CARD_BACKGROUND: "#fff",
+  USER_EMAIL: "#fff",
 };
