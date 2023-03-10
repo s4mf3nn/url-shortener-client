@@ -19,6 +19,7 @@ export const SignupModal = () => {
     try {
       setIsLoading(true);
       await FirebaseAuthService.registerUser(email, password);
+      document.body.style.overflow = 'unset'; // Enable scroll bar
       setEmail("");
       setPassword("");
       setIsSignupModalOpen(false);

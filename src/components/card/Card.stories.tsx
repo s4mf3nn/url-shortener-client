@@ -12,6 +12,6 @@ export const Overview = Template.bind({});
 Overview.args = {
   shortId: 'y6gpuN',
   originUrl: 'https://github.com/s4mf3nn/solar-system',
-  createdAt: 'march 5 2023 · 19:47',
+  createdAt: new Date(),
   views: 96
 };

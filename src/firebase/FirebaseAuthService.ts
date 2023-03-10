@@ -23,9 +23,10 @@ const loginWithGoogle = () => {
   return auth.signInWithPopup(provider);
 };
 
-const subscribeToAuthChanges = (handleAuthChange: any): void => {
+const subscribeToAuthChanges = (handleAuthChange: (value: any) => void, setIsLoadingAuth: (value: boolean) => void): void => {
   auth.onAuthStateChanged(user => {
     handleAuthChange(user);
+    setIsLoadingAuth(false);
   });
 };
 

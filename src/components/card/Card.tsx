@@ -4,11 +4,12 @@ import { Clock, Copy, Eye } from 'react-feather';
 import { useStore } from '../../store';
 import { Text } from '../text/Text';
 import * as sc from './card.style';
+import Moment from 'react-moment';
 
 interface CardProps {
   shortId: string;
   originUrl: string;
-  createdAt: string;
+  createdAt: Date;
   views: number;
 }
 
@@ -41,7 +42,9 @@ export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) =>
       <sc.Spacer size="1.5rem" />
       <sc.CreatedAt>
         <Clock size={14} />
-        <Text ellipsis small>{createdAt}</Text>
+        <Text ellipsis small>
+          <Moment date={createdAt} format="MMMM DD YYYY · HH:mm" />
+        </Text>
       </sc.CreatedAt>
     </sc.Wrapper >
   );

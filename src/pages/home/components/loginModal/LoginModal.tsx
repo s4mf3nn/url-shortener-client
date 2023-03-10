@@ -33,6 +33,7 @@ export const LoginModal = () => {
   const handleLoginWithGoogle = async () => {
     try {
       await FirebaseAuthService.loginWithGoogle();
+      document.body.style.overflow = 'unset'; // Enable scroll bar
       setIsLoginModalOpen(false);
     } catch (error) {
       if (error instanceof Error) return alert(error.message);
