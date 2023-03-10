@@ -43,7 +43,7 @@ export const Subtitle = styled.div`
   max-width: 360px;
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   gap: 12px;
 

@@ -29,6 +29,7 @@ export const LoginModal = () => {
     }
   };
 
+  // Log user with Google account
   const handleLoginWithGoogle = async () => {
     try {
       await FirebaseAuthService.loginWithGoogle();

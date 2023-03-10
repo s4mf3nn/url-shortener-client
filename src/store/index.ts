@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import * as theme from '../styles/themes';
 import { ITheme } from '../styles/themes/theme.interface';
 
-interface IStore {
+export interface IStore {
   theme: ITheme;
   setTheme: (theme: string) => void;
   themeIndex: number;
