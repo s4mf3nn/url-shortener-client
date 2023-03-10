@@ -1,16 +1,16 @@
 import { ITheme } from "./theme.interface";
 
-export const beach: ITheme = {
-  SHORTEN_BTN_BACKGROUND: "#3A98B9",
+export const dark: ITheme = {
+  SHORTEN_BTN_BACKGROUND: "#1463ff",
   SHORTEN_BTN_LABEL: "#fff",
-  SIGNUP_BTN_BACKGROUND: "#3A98B9",
+  SIGNUP_BTN_BACKGROUND: "#1463ff",
   SIGNUP_BTN_LABEL: "#fff",
-  LOGIN_BTN_BACKGROUND: "#E8D5C4",
+  LOGIN_BTN_BACKGROUND: "#fff",
   LOGIN_BTN_LABEL: "#000",
-  HEADER: "#f3ebe0",
-  LOGO_BACKGROUND: "#3A98B9",
+  HEADER: "#0d1116",
+  LOGO_BACKGROUND: "#1463ff",
   LOGO_ICON: "#fff",
-  BRAND: "#000",
+  BRAND: "#fff",
   SHORT_LINK: "#3A98B9",
   COPY_BTN_BACKGROUND: "#3A98B9",
   COPY_BTN_ICON: "#fff",
@@ -24,6 +24,9 @@ export const beach: ITheme = {
   MODAL_LOGIN_TEXT: "#000",
   MODAL_LOGIN_BTN_BACKGROUND: "#3A98B9",
   MODAL_LOGIN_BTN_LABEL: "#fff",
-  BODY_BACKGROUND: "#fff",
+  BODY_BACKGROUND: "#131920",
   CARD_BACKGROUND: "#fff",
+  USER_EMAIL: "#fff",
+  GOOGLE_BTN_BACKGROUND: "#3A98B9",
+  GOOGLE_BTN_LABEL: "#fff",
 };

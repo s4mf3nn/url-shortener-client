@@ -24,4 +24,7 @@ export interface ITheme {
   MODAL_LOGIN_BTN_LABEL: string;
   BODY_BACKGROUND: string;
   CARD_BACKGROUND: string;
+  USER_EMAIL: string;
+  GOOGLE_BTN_BACKGROUND: string;
+  GOOGLE_BTN_LABEL: string;
 }

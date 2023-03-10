@@ -6,43 +6,48 @@ import { GlobalStyle } from '../../styles/GlobalStyle';
 import { LoginModal, SignupModal } from './components';
 import * as sc from './home.style';
 import { links as data } from './mocks/links.mock';
-// import firebase from '../../FirebaseConfig';
+import FirebaseAuthService from '../../firebase/FirebaseAuthService';
+import { Link } from './home.interface';
+import { User } from 'react-feather';
 
-interface Link {
-  shortId: string;
-  originUrl: string;
-  createdAt: string;
-  views: number;
-}
-
-const themes = ["sweet", "mario", "nintendo", "beach", "autumn", "sunset", "vintage"];
+const themes = ["sweet", "mario", /*"dark",*/ "autumn", "sunset", "vintage"];
 
 export const Home = () => {
-  const { theme, themeIndex, setThemeIndex, changeTheme } = useStore();
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const store = useStore();
+
+  const [user, setUser] = useState<any>(null);
+  const [urlToShorten, setUrlToShorten] = useState<string>("");
   const [links] = useState<Link[]>(data);
+
+  useEffect(() => {
+    FirebaseAuthService.subscribeToAuthChanges(setUser);
+  }, []);
 
   // Open signup modal when user click on "Signup" button
   const handleOpenSignupModal = (): void => {
-    setIsSignupModalOpen(true);
+    store.setIsSignupModalOpen(true);
     window.scrollTo({ top: 0 });
     document.body.style.overflow = 'hidden';
   };
 
   // Open login modal when user click on "Login" button
   const handleOpenLoginModal = (): void => {
-    setIsLoginModalOpen(true);
+    store.setIsLoginModalOpen(true);
     window.scrollTo({ top: 0 });
     document.body.style.overflow = 'hidden';
   };
 
   // Close modal when user click "Close" button
   const handleCloseModal = (): void => {
-    setIsSignupModalOpen(false);
-    setIsLoginModalOpen(false);
+    store.setIsSignupModalOpen(false);
+    store.setIsLoginModalOpen(false);
     window.scrollTo({ top: 0 });
     document.body.style.overflow = 'unset';
+  };
+
+  // Logout user
+  const handleLogout = (): void => {
+    FirebaseAuthService.logoutUser();
   };
 
   // Create short Url when user click on "Shorten" button
@@ -50,26 +55,36 @@ export const Home = () => {
 
   // Change the app theme when user clicks the logo
   const themeSwitcher = () => {
-    const newIndex = themeIndex + 1;
+    const newIndex = store.themeIndex + 1;
     newIndex > themes.length - 1
-      ? setThemeIndex(0)
-      : setThemeIndex(themeIndex + 1);
+      ? store.setThemeIndex(0)
+      : store.setThemeIndex(store.themeIndex + 1);
   };
 
   // Update the store with the new theme
   useEffect(() => {
-    changeTheme(themes[themeIndex]);
-  }, [themeIndex, changeTheme]);
+    store.setTheme(themes[store.themeIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.themeIndex, store.setTheme]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle bgColor={theme.BODY_BACKGROUND} />
-      <sc.Header theme={theme}>
+    <ThemeProvider theme={store.theme}>
+      <GlobalStyle bgColor={store.theme.BODY_BACKGROUND} />
+      <sc.Header theme={store.theme}>
         <Logo withBrand onClick={themeSwitcher} />
-        <sc.BtnContainer>
-          <Button bgColor={theme.SIGNUP_BTN_BACKGROUND} labelColor={theme.SIGNUP_BTN_LABEL} label="Signup" onClick={handleOpenSignupModal} />
-          <Button bgColor={theme.LOGIN_BTN_BACKGROUND} labelColor={theme.LOGIN_BTN_LABEL} label="Login" onClick={handleOpenLoginModal} />
-        </sc.BtnContainer>
+        {!user ? (
+          <sc.BtnContainer>
+            <Button bgColor={store.theme.SIGNUP_BTN_BACKGROUND} labelColor={store.theme.SIGNUP_BTN_LABEL} label="Signup" onClick={handleOpenSignupModal} />
+            <Button bgColor={store.theme.LOGIN_BTN_BACKGROUND} labelColor={store.theme.LOGIN_BTN_LABEL} label="Login" onClick={handleOpenLoginModal} />
+          </sc.BtnContainer>
+        ) : (
+          <sc.BtnContainer>
+            {/* <Text color={store.theme.USER_EMAIL} small>{user.email}</Text> */}
+            <User color={store.theme.USER_EMAIL} />
+            <Button bgColor={store.theme.SIGNUP_BTN_BACKGROUND} labelColor={store.theme.SIGNUP_BTN_LABEL} label="Logout" onClick={handleLogout} />
+          </sc.BtnContainer>
+        )
+        }
       </sc.Header>
       <sc.Main>
         <Heading level="h1">Keep your link fit!</Heading>
@@ -79,8 +94,8 @@ export const Home = () => {
         </sc.Subtitle>
         <sc.Spacer size="2rem" />
         <sc.FormContainer>
-          <Input type="url" placeholder="Past your link and make it shorter" />
-          <Button bgColor={theme.SHORTEN_BTN_BACKGROUND} labelColor={theme.SHORTEN_BTN_LABEL} label="Shorten" scissors onClick={handleShortUrl} />
+          <Input type="url" placeholder="Past your link and make it shorter" onChange={setUrlToShorten} value={urlToShorten} />
+          <Button bgColor={store.theme.SHORTEN_BTN_BACKGROUND} labelColor={store.theme.SHORTEN_BTN_LABEL} label="Shorten" scissors onClick={handleShortUrl} />
         </sc.FormContainer>
         <sc.Spacer size="1.25rem" />
         <Text>Shortening <b>4,601</b> URLs that have been accessed <b>80,193</b> times.</Text>
@@ -98,10 +113,10 @@ export const Home = () => {
         })}
       </sc.List>
       <sc.Spacer size="3rem" />
-      <Modal isOpen={isSignupModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_SIGNUP_BACKGROUND}>
+      <Modal isOpen={store.isSignupModalOpen} onClose={handleCloseModal} bgColor={store.theme.MODAL_SIGNUP_BACKGROUND}>
         <SignupModal />
       </Modal>
-      <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal} bgColor={theme.MODAL_LOGIN_BACKGROUND}>
+      <Modal isOpen={store.isLoginModalOpen} onClose={handleCloseModal} bgColor={store.theme.MODAL_LOGIN_BACKGROUND}>
         <LoginModal />
       </Modal>
     </ThemeProvider>

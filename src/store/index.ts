@@ -1,31 +1,38 @@
 // @ts-nocheck
 import { create } from 'zustand';
-import { autumn, beach, mario, nintendo, sunset, sweet, vintage } from '../styles/themes';
+import * as theme from '../styles/themes';
 import { ITheme } from '../styles/themes/theme.interface';
 
-interface IState {
+interface IStore {
   theme: ITheme;
+  setTheme: (theme: string) => void;
   themeIndex: number;
   setThemeIndex: (theme: number) => void;
-  changeTheme: (theme: string) => void;
+  isSignupModalOpen: boolean;
+  setIsSignupModalOpen: (bool: boolean) => void;
+  isLoginModalOpen: boolean;
+  setIsLoginModalOpen: (bool: boolean) => void;
 }
 
 const themes = {
-  "autumn": autumn,
-  "beach": beach,
-  "mario": mario,
-  "nintendo": nintendo,
-  "sunset": sunset,
-  "sweet": sweet,
-  "vintage": vintage,
+  "autumn": theme.autumn,
+  "dark": theme.dark,
+  "mario": theme.mario,
+  "sunset": theme.sunset,
+  "sweet": theme.sweet,
+  "vintage": theme.vintage,
 };
 
-export const useStore = create<IState>()((set) => ({
-  theme: mario,
+export const useStore = create<IStore>()((set) => ({
+  theme: theme.mario,
+  setTheme: (theme) => set(() => ({ theme: themes[theme] })),
   themeIndex: parseInt(localStorage.getItem("themeIndex")) || 0,
   setThemeIndex: (index) => set(() => {
     localStorage.setItem("themeIndex", index);
     return { themeIndex: index };
   }),
-  changeTheme: (theme) => set(() => ({ theme: themes[theme] }))
+  isSignupModalOpen: false,
+  setIsSignupModalOpen: (bool) => set(() => ({ isSignupModalOpen: bool })),
+  isLoginModalOpen: false,
+  setIsLoginModalOpen: (bool) => set(() => ({ isLoginModalOpen: bool })),
 }));
