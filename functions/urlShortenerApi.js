@@ -19,6 +19,22 @@ app.get('/links/:shortId', async (req, res) => {
     if (query.empty) return res.status(404).send("Not found");
 
     const link = query.docs[0].data();
+    res.status(200).send(link);
+
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+app.get('/redirect/:shortId', async (req, res) => {
+  try {
+    const { shortId } = req.params;
+
+    const query = await firestore.collection("urls").where("shortId", "==", shortId).get();
+
+    if (query.empty) return res.status(404).send("Not found");
+
+    const link = query.docs[0].data();
     res.redirect(link.originUrl);
 
   } catch (error) {
