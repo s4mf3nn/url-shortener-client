@@ -20,6 +20,15 @@ export const View: FC<HomeViewProps> = ({ user,
   themeSwitcher,
   isLoadingAuth, }) => {
 
+  const handleClick = () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      console.log('dev');
+    } else {
+      console.log('prod');
+    }
+    // window.location.href = 'https://us-central1-url-shortener-81190.cloudfunctions.net/api/links/DfS2Dww';
+  };
+
   return (
     <ThemeProvider theme={store.theme}>
       <GlobalStyle bgColor={store.theme.BODY_BACKGROUND} />
@@ -48,6 +57,7 @@ export const View: FC<HomeViewProps> = ({ user,
         <sc.Subtitle>
           <Text>Start shortening your URLs today in just a few clicks and keep track your audience.</Text>
         </sc.Subtitle>
+        <button onClick={handleClick}>click</button>
         <sc.Spacer size="2rem" />
         <sc.FormContainer onSubmit={handleSubmitUrl}>
           <Input type="url" placeholder="Past your link and make it shorter" onChange={setOriginUrl} value={originUrl} />
