@@ -18,7 +18,11 @@ export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) =>
 
   // Copy short URL to clicpboard
   const handleCopyUrl = () => {
-    copy(`https://www.fiii.it/${shortId}`);
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      copy(`http://localhost:3000/${shortId}`);
+    } else {
+      copy(`https://url-shortener-81190.web.app/${shortId}`);
+    }
   };
 
   return (

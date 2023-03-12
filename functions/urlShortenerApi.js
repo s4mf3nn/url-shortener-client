@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.get('/links/:shortId', async (req, res) => {
   try {
     const { shortId } = req.params;
-
     const query = await firestore.collection("urls").where("shortId", "==", shortId).get();
 
     if (query.empty) return res.status(404).send("Not found");
@@ -29,7 +28,6 @@ app.get('/links/:shortId', async (req, res) => {
 app.get('/redirect/:shortId', async (req, res) => {
   try {
     const { shortId } = req.params;
-
     const query = await firestore.collection("urls").where("shortId", "==", shortId).get();
 
     if (query.empty) return res.status(404).send("Not found");
