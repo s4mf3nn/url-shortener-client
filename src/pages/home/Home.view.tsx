@@ -7,8 +7,10 @@ import { LoginModal, SignupModal } from './components';
 import { Link, HomeViewProps } from './home.interface';
 import * as sc from './home.style';
 
-export const View: FC<HomeViewProps> = ({ user,
+export const View: FC<HomeViewProps> = ({
+  user,
   links,
+  stats,
   store,
   originUrl,
   setOriginUrl,
@@ -54,7 +56,7 @@ export const View: FC<HomeViewProps> = ({ user,
           <Button bgColor={store.theme.SHORTEN_BTN_BACKGROUND} labelColor={store.theme.SHORTEN_BTN_LABEL} label="Shorten" scissors disabled={!originUrl} />
         </sc.FormContainer>
         <sc.Spacer size="1.25rem" />
-        <Text>Shortening <b>4,601</b> URLs that have been accessed <b>80,193</b> times.</Text>
+        <Text>Shortening <b>{stats.totalLinks}</b> URLs that have been accessed <b>{stats.totalViews}</b> times.</Text>
       </sc.Main>
       <sc.Spacer size="4rem" />
       {/* LINKS LIST */}

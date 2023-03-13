@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import FirebaseAuthService from '../../firebase/FirebaseAuthService';
 import FirebaseFirestoreService from '../../firebase/FirebaseFirestoreService';
 import { useStore } from '../../store';
-import { Link } from './home.interface';
+import { Link, Stat } from './home.interface';
 import { View } from './Home.view';
 import { customAlphabet } from 'nanoid';
 
@@ -15,12 +15,14 @@ export const Home = () => {
   const [user, setUser] = useState<unknown | null>(null);
   const [originUrl, setOriginUrl] = useState<string>("");
   const [links, setLinks] = useState<Link[] | null>(null);
+  const [stats, setStats] = useState<Stat>({ totalLinks: 0, totalViews: 0 });
 
   // Check if user is logged in and fetch links
   useEffect(() => {
     document.body.style.overflow = 'unset'; // Enable scroll bar that could be disabled when previous modal has been opened
     FirebaseAuthService.subscribeToAuthChanges(setUser, setIsLoadingAuth);
     if (user) fetchLinks();
+    fetchStats();
   }, [user]);
 
   // Get the list of links created by the current user
@@ -34,6 +36,20 @@ export const Home = () => {
     });
 
     setLinks(data as Link[]);
+  };
+
+  // Get the stats
+  const fetchStats = async () => {
+    const response = await FirebaseFirestoreService.readDocuments('statistics');
+
+    const data = response.docs.map((doc) => {
+      return doc.data();
+    });
+
+    setStats({
+      totalLinks: data[0].totalLinks,
+      totalViews: data[1].totalViews,
+    });
   };
 
   // Open signup modal when user click on "Signup" button
@@ -69,11 +85,13 @@ export const Home = () => {
     e.preventDefault();
     if (!originUrl) return;
 
+    if (!user) return alert('You must log in or create an account before shortening a URL.');
+
     try {
       // TODO: Si l'utilisateur est déjà connecté, vérifier qu'il' n'a pas déjà crée un id avec une url déjà existante en BDD
       // TODO: Si l'utilisateur n'est pas connecté, vérifier qu'il' n'a pas déjà crée un id avec une url déjà existante dans le local storage
       const shortId = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 7);
-      await FirebaseFirestoreService.createDocument('urls', {
+      FirebaseFirestoreService.createDocument('urls', {
         originUrl,
         shortId: shortId(),
         createdAt: new Date(),
@@ -81,7 +99,13 @@ export const Home = () => {
       });
 
       setOriginUrl("");
-      if (user) fetchLinks();
+      if (user) {
+        fetchLinks();
+        setStats({
+          ...stats,
+          totalLinks: stats.totalLinks + 1,
+        });
+      };
     } catch (error) {
       if (error instanceof Error) return alert(error.message);
     }
@@ -104,6 +128,7 @@ export const Home = () => {
   return <View {...{
     user,
     links,
+    stats,
     store,
     originUrl,
     setOriginUrl,

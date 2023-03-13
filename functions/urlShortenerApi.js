@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const FirebaseConfig = require("./firebase/firebase.config");
 const firestore = FirebaseConfig.firestore;
+const admin = FirebaseConfig.admin;
 
 const app = express();
 
@@ -31,6 +32,9 @@ app.get('/redirect/:shortId', async (req, res) => {
     const query = await firestore.collection("urls").where("shortId", "==", shortId).get();
 
     if (query.empty) return res.status(404).send("Not found");
+
+    const collectionRef = firestore.collection('statistics').doc("totalViews");
+    collectionRef.update("totalViews", admin.firestore.FieldValue.increment(1));
 
     const link = query.docs[0].data();
     res.redirect(link.originUrl);

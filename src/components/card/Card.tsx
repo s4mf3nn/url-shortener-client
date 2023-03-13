@@ -35,10 +35,11 @@ export const Card: FC<CardProps> = ({ shortId, originUrl, createdAt, views }) =>
         <sc.Side>
           <sc.Copy onClick={handleCopyUrl} theme={theme}>
             <Copy size={16} color={theme.COPY_BTN_ICON} />
+            Copy
           </sc.Copy>
-          <sc.View theme={theme}>
+          {/* <sc.View theme={theme}>
             <Eye size={16} color={theme.VIEWS_BTN_LABEL} /> {views}
-          </sc.View>
+          </sc.View> */}
         </sc.Side>
       </sc.Header>
       <sc.Spacer size=".5rem" />

@@ -41,12 +41,13 @@ export const Copy = styled.button<{ theme: ITheme; }>`
   background-color: ${p => p.theme.COPY_BTN_BACKGROUND};
   border: 2px solid #000;
   border-radius: 9px;
-  color: #000;
+  color: ${p => p.theme.COPY_BTN_ICON};
   cursor: pointer;
   display: flex;
+  gap: 5px;
   height: 36px;
   justify-content: center;
-  width: 36px;
+  width: 86px;
   -webkit-tap-highlight-color: transparent;
 
   &:active {
